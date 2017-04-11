@@ -45,7 +45,7 @@ class MentionWrapper extends Component {
           child,
           left: coords.left + left + this.ref.scrollLeft,
           triggerIdx,
-          top: coords.top + top - this.ref.scrollTop
+          top: coords.top + top + coords.height - this.ref.scrollTop
         })
       }, 0)
     } else {
@@ -118,7 +118,7 @@ class MentionWrapper extends Component {
     return (
       <div>
         <textarea {...inputProps} ref={this.inputRef} onInput={this.handleInput} onKeyDown={this.handleKeyDown}/>
-        <MentionMenu
+        {top !== undefined && <MentionMenu
           active={active}
           className={className}
           left={left}
@@ -127,7 +127,7 @@ class MentionWrapper extends Component {
           options={options}
           style={style}
           top={top}
-        />
+        />}
       </div>
     );
   }

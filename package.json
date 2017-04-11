@@ -1,6 +1,6 @@
 {
   "name": "react-githubish-mentions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a mentions component kinda like GitHub's. But made in react.",
   "main": "./lib/index.js",
   "scripts": {
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "react-portal-hoc": "^0.3.2",
-    "textarea-caret": "^3.0.2"
+    "textarea-caret": "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
   }
 }
