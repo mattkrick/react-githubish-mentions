@@ -11,8 +11,8 @@
   },
   "repository": {
     "type": "git",
-  },
     "url": "git+https://github.com/mattkrick/react-githubish-mentions.git"
+  },
   "keywords": [
     "react",
     "mentions",
