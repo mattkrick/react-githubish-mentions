@@ -66,11 +66,11 @@ class MentionWrapper extends Component {
   }
 
   handleInput = (e) => {
+    this.maybeMention();
     const {onInput} = this.props;
     if (onInput) {
       onInput(e);
     }
-    this.maybeMention();
   };
 
   inputRef = (c) => {
@@ -108,6 +108,10 @@ class MentionWrapper extends Component {
         e.preventDefault();
         this.closeMenu();
       }
+    }
+    const {onKeyDown} = this.props;
+    if (onKeyDown) {
+      onKeyDown(e);
     }
   }
 
