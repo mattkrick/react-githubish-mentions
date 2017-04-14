@@ -123,7 +123,7 @@ class MentionWrapper extends Component {
   selectItem = (active) => (e) => {
     const {options, triggerIdx} = this.state;
     const preMention = this.ref.value.substr(0, triggerIdx);
-    const mention = this.replace(this.ref.value[triggerIdx], options[active]);
+    const mention = this.replace(options[active], this.ref.value[triggerIdx]);
     // const mention = options[active].value + ' ';
     const postMention = this.ref.value.substr(this.ref.selectionStart);
     this.ref.value = `${preMention}${mention}${postMention}`
