@@ -7,6 +7,8 @@ const getMenuProps = (keystrokeTriggered, children) => {
   return child ? child.props : {};
 };
 
+const defaultReplace = (userObj, trigger) => `${trigger}${userObj.value} `;
+
 class MentionWrapper extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,8 @@ class MentionWrapper extends Component {
       const coords = getCaretCoords(this.ref, this.ref.selectionStart);
       const {top, left} = this.ref.getBoundingClientRect();
       const child = getMenuProps(keystrokeTriggered, this.props.children);
-      const {resolve} = child;
+      const {replace, resolve} = child;
+      this.replace = replace || defaultReplace;
       this.makeOptions(query, resolve);
       // that stupid bug where the caret moves to the end happens unless we do it next tick
       setTimeout(() => {
@@ -117,29 +120,29 @@ class MentionWrapper extends Component {
     }
   };
 
-selectItem = (active) => (e) => {
-  const {options, triggerIdx} = this.state;
-  const preMention = this.ref.value.substr(0, triggerIdx + 1);
-  const mention = options[active].value + ' ';
-  const postMention = this.ref.value.substr(this.ref.selectionStart);
-  this.ref.value = `${preMention}${mention}${postMention}`
-  const {onChange} = this.props;
-  if (onChange) {
-    onChange(e);
+  selectItem = (active) => (e) => {
+    const {options, triggerIdx} = this.state;
+    const preMention = this.ref.value.substr(0, triggerIdx);
+    const mention = this.replace(this.ref.value[triggerIdx], options[active]);
+    // const mention = options[active].value + ' ';
+    const postMention = this.ref.value.substr(this.ref.selectionStart);
+    this.ref.value = `${preMention}${mention}${postMention}`
+    const {onChange} = this.props;
+    if (onChange) {
+      onChange(e);
+    }
+    const caretPosition = this.ref.value.length - postMention.length;
+    this.ref.setSelectionRange(caretPosition, caretPosition);
+    this.closeMenu();
+    this.ref.focus();
   }
-  const caretPosition = this.ref.value.length - postMention.length;
-  this.ref.setSelectionRange(caretPosition, caretPosition);
-  this.closeMenu();
-  this.ref.focus();
-}
 
-render()
-{
-  const {component, getRef, ...inputProps} = this.props;
-  const {active, child, left, top, options} = this.state;
-  const {item, className, style} = child;
-  return (
-    <div>
+  render() {
+    const {component, getRef, ...inputProps} = this.props;
+    const {active, child, left, top, options} = this.state;
+    const {item, className, style} = child;
+    return (
+      <div>
         <textarea
           {...inputProps}
           ref={this.inputRef}
@@ -147,20 +150,20 @@ render()
           onInput={this.handleInput}
           onKeyDown={this.handleKeyDown}
         />
-      {top !== undefined && <MentionMenu
-        active={active}
-        className={className}
-        left={left}
-        isOpen={Boolean(options.length)}
-        item={item}
-        options={options}
-        selectItem={this.selectItem}
-        style={style}
-        top={top}
-      />}
-    </div>
-  );
-}
+        {top !== undefined && <MentionMenu
+          active={active}
+          className={className}
+          left={left}
+          isOpen={options.length > 0}
+          item={item}
+          options={options}
+          selectItem={this.selectItem}
+          style={style}
+          top={top}
+        />}
+      </div>
+    );
+  }
 }
 
 export default MentionWrapper;

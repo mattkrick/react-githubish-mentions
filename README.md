@@ -78,7 +78,11 @@ Think of this as a trigger, written in JSX. Any `style` or `className` is passed
 
 Options:
 - `trigger`: The keystroke to watch for. Usually a single character like `@` or `#`
-- `resolve(query)`: An `AsynFunction` that receives a text query (eg `query(@foo) === 'foo'`) 
+- `replace(trigger, userObject)`: A function dictating how to autocomplete the sentence. 
+Default is ``(userObj, trigger) => `${trigger}${userObj.value} ` ``.
+If you wanted to write a trigger for emojis, you probably don't want the `:` trigger to remain, 
+and you want the character, not the text value, so you might use ``(userObj) => `${userObj.emoji} ` `` 
+- `resolve(query)`: An `AsynFunction` that receives a text query (the part after the trigger, eg `query('@foo') === 'foo'`) 
 and returns an array of objects, where each object has a `value` key which is the string that will be injected into the textarea.
 - `item`: A custom menu item that you provide. See example above.
 
@@ -96,6 +100,14 @@ Q: How is the menu position calculated?
 A: Very carefully, using [textarea-caret](https://github.com/component/textarea-caret-position). 
 Until `Document.caretPositionFromPoint()` is a thing, it's the best there is. 
 
+Q: How do I filter the results in my `resovle` function?
+
+A: There are 100s of ways to filter, 
+you could go naive with a `startsWith` or `indexOf` or go extreme with a fuzzy or levenshtein distance.
+Chances are, each trigger will warrant a different filter. 
+This package does one thing, and does it well. 
+It leaves the filtering up to your `resovle` function.
+ 
 ## License
 
 MIT
