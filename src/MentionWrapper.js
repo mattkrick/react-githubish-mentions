@@ -81,60 +81,86 @@ class MentionWrapper extends Component {
     }
   };
 
+  handleBlur = (e) => {
+    // if the menu is open, don't treat a click as a blur (required for the click handler)
+    const {onBlur} = this.props;
+    if (onBlur && !this.state.top) {
+      onBlur(e);
+    }
+  };
+
   handleKeyDown = (e) => {
     const {options, active, triggerIdx} = this.state;
+    let keyCaught;
     if (triggerIdx !== undefined) {
       if (e.key === 'ArrowDown') {
         this.setState({
           active: Math.min(active + 1, options.length - 1)
         })
-        e.preventDefault();
+        keyCaught = true;
       } else if (e.key === 'ArrowUp') {
         this.setState({
           active: Math.max(active - 1, 0)
         })
-        e.preventDefault();
+        keyCaught = true;
       } else if (e.key === 'Tab' || e.key === 'Enter') {
-        const preMention = this.ref.value.substr(0, triggerIdx + 1);
-        const mention = options[active].value + ' ';
-        const postMention = this.ref.value.substr(this.ref.selectionStart);
-        this.ref.value = `${preMention}${mention}${postMention}`
-        const {onChange} = this.props;
-        if (onChange) {
-          onChange(e);
-        }
-        const caretPosition = this.ref.value.length - postMention.length;
-        this.ref.setSelectionRange(caretPosition, caretPosition);
-        e.preventDefault();
-        this.closeMenu();
+        this.selectItem(active)(e);
+        keyCaught = true;
       }
     }
     const {onKeyDown} = this.props;
-    if (onKeyDown) {
+    if (keyCaught) {
+      e.preventDefault();
+    } else if (onKeyDown) {
+      // only call the passed in keyDown handler if the key wasn't one of ours
       onKeyDown(e);
     }
-  }
+  };
 
-  render() {
-    const {component, getRef, ...inputProps} = this.props;
-    const {active, child, left, top, options} = this.state;
-    const {item, className, style} = child;
-    return (
-      <div>
-        <textarea {...inputProps} ref={this.inputRef} onInput={this.handleInput} onKeyDown={this.handleKeyDown}/>
-        {top !== undefined && <MentionMenu
-          active={active}
-          className={className}
-          left={left}
-          isOpen={Boolean(options.length)}
-          item={item}
-          options={options}
-          style={style}
-          top={top}
-        />}
-      </div>
-    );
+selectItem = (active) => (e) => {
+  const {options, triggerIdx} = this.state;
+  const preMention = this.ref.value.substr(0, triggerIdx + 1);
+  const mention = options[active].value + ' ';
+  const postMention = this.ref.value.substr(this.ref.selectionStart);
+  this.ref.value = `${preMention}${mention}${postMention}`
+  const {onChange} = this.props;
+  if (onChange) {
+    onChange(e);
   }
+  const caretPosition = this.ref.value.length - postMention.length;
+  this.ref.setSelectionRange(caretPosition, caretPosition);
+  this.closeMenu();
+  this.ref.focus();
+}
+
+render()
+{
+  const {component, getRef, ...inputProps} = this.props;
+  const {active, child, left, top, options} = this.state;
+  const {item, className, style} = child;
+  return (
+    <div>
+        <textarea
+          {...inputProps}
+          ref={this.inputRef}
+          onBlur={this.handleBlur}
+          onInput={this.handleInput}
+          onKeyDown={this.handleKeyDown}
+        />
+      {top !== undefined && <MentionMenu
+        active={active}
+        className={className}
+        left={left}
+        isOpen={Boolean(options.length)}
+        item={item}
+        options={options}
+        selectItem={this.selectItem}
+        style={style}
+        top={top}
+      />}
+    </div>
+  );
+}
 }
 
 export default MentionWrapper;

@@ -2,7 +2,7 @@ import React from 'react';
 import portal from 'react-portal-hoc';
 
 const MentionMenu = (props) => {
-  const {active, className, item: Item, options, top, left, style = {}} = props;
+  const {active, className, item: Item, options, top, left, selectItem, style = {}} = props;
   const menuStyle = {
     ...style,
     left,
@@ -11,9 +11,15 @@ const MentionMenu = (props) => {
   };
   return (
     <div style={menuStyle} className={className}>
-      {options.map((option, idx) => <Item key={idx} active={active === idx} {...option}/>)}
+      {options.map((option, idx) => {
+        return (
+          <div key={idx} onClick={selectItem(idx)}>
+            <Item active={active === idx} {...option}/>
+          </div>
+        )
+      })}
     </div>
   )
 };
 
-export default portal({clickToClose: true, escToClose: true})(MentionMenu);
+export default portal({clickToClose: true,escToClose: true})(MentionMenu);

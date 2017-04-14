@@ -10,10 +10,10 @@ It strives to do exactly what GitHub does when you type `#` or `@`.
 ## How's it different from react-mentions
 react-mentions is great!
 but i needed:
-- something a little more flexible (like letting me pass in my own component for individual Menu items)
+- something a little more flexible (like letting me pass in my own component with avatars for individual Menu items)
 - a menu that uses a portal instead of `position: 'absolute'`
-- something that used `textarea-caret`, which is the most robust solution and, rumor has it, that's what GH uses
-- something that let's me use controlled components, if need be
+- something with pixel-perfect caret positioning
+- something that let's me use controlled components, like redux-form
 
 ## Usage
 
