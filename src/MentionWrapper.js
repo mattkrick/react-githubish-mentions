@@ -21,11 +21,15 @@ class MentionWrapper extends Component {
   }
 
 
-  makeOptions = async(query, resolve) => {
+  makeOptions = async (query, resolve) => {
     const options = await resolve(query);
-    this.setState({
-      options
-    })
+    if (options.length > 0) {
+      this.setState({
+        options
+      })
+    } else {
+      this.closeMenu();
+    }
   };
 
   maybeMention() {
@@ -123,8 +127,8 @@ class MentionWrapper extends Component {
   selectItem = (active) => (e) => {
     const {options, triggerIdx} = this.state;
     const preMention = this.ref.value.substr(0, triggerIdx);
-    const mention = this.replace(options[active], this.ref.value[triggerIdx]);
-    // const mention = options[active].value + ' ';
+    const option = options[active];
+    const mention = this.replace(option, this.ref.value[triggerIdx]);
     const postMention = this.ref.value.substr(this.ref.selectionStart);
     this.ref.value = `${preMention}${mention}${postMention}`
     const {onChange} = this.props;
@@ -138,7 +142,7 @@ class MentionWrapper extends Component {
   }
 
   render() {
-    const {component, getRef, ...inputProps} = this.props;
+    const {children, component, getRef, ...inputProps} = this.props;
     const {active, child, left, top, options} = this.state;
     const {item, className, style} = child;
     return (
