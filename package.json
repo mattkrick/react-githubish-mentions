@@ -1,6 +1,6 @@
 {
   "name": "react-githubish-mentions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a mentions component kinda like GitHub's. But made in react.",
   "main": "./lib/index.js",
   "scripts": {
