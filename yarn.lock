@@ -1581,9 +1581,9 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-portal-hoc@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-portal-hoc/-/react-portal-hoc-0.3.2.tgz#09dd3a94212c17dcb5fd636a4fcac27b9c27909c"
+react-portal-hoc@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-portal-hoc/-/react-portal-hoc-0.4.0.tgz#45836f2c1197aa44f6c7ccd75158477a7066ec7c"
 
 react@^15.4.2:
   version "15.4.2"

@@ -70,6 +70,8 @@ Think of this as `<textarea>`. Everything except the 2 options below get passed 
 Options:
 - `getRef`: a custom `ref`, because react yells if you call something ref.
 - `component`: defaults to `"textarea"` you can pass in `"input"` or even a custom component if you want (TODO)
+- `onChange(event, newValue)`: your standard `onChange` event handler, but with a newValue argument added
+to support clicking an option with the mouse.
 
 ```
 MentionMenu

@@ -130,10 +130,11 @@ class MentionWrapper extends Component {
     const option = options[active];
     const mention = this.replace(option, this.ref.value[triggerIdx]);
     const postMention = this.ref.value.substr(this.ref.selectionStart);
-    this.ref.value = `${preMention}${mention}${postMention}`
+    const newValue = `${preMention}${mention}${postMention}`;
+    this.ref.value = newValue;
     const {onChange} = this.props;
     if (onChange) {
-      onChange(e);
+      onChange(e, newValue);
     }
     const caretPosition = this.ref.value.length - postMention.length;
     this.ref.setSelectionRange(caretPosition, caretPosition);
