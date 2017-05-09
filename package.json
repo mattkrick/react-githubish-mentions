@@ -32,12 +32,14 @@
     "babel-preset-react": "^6.x.x",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "rimraf": "^2.5.3"
   },
   "dependencies": {
     "react-portal-hoc": "^0.4.0",
     "textarea-caret": "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
