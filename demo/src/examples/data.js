@@ -1,5 +1,3 @@
-import React from "react";
-import cn from "classnames";
 import UserProfiles from "./data.json";
 
 // An example of a user profile data item
@@ -12,6 +10,7 @@ import UserProfiles from "./data.json";
 //     "birthdate": "2017-01-10"
 //   }
 
+// prepare the data
 const profiles = UserProfiles.sort(
   (a, b) => (a.username < b.username ? -1 : 1)
 ).map(profile => ({
@@ -19,20 +18,4 @@ const profiles = UserProfiles.sort(
   value: profile.username
 }));
 
-const MenuItem = props => {
-  // react-githubish-mentions provides `active` you provide everything else
-  const { active, username } = props;
-  return <div className={cn("menuitem", { active: active })}>{username}</div>;
-};
-
-const filterProfiles = prefix => {
-  if (prefix === "") {
-    return profiles.slice(0, 10);
-  }
-  prefix = prefix.toLowerCase();
-  return profiles
-    .filter(profile => profile.username.startsWith(prefix))
-    .slice(0, 10);
-};
-
-export { profiles, filterProfiles, MenuItem };
+export default profiles;

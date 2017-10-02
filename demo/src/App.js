@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { profiles } from "./examples/data";
-import { Simple } from "./examples";
+import profiles from "./examples/data";
+import { Simple, Highlighted } from "./examples";
 
 class App extends Component {
   render() {
@@ -16,6 +16,16 @@ class App extends Component {
             <div>
               <h2>Simple Demo</h2>
               <Simple placeholder="@-mentioning" />
+            </div>
+
+            <div>
+              <h2>Highlighted Match</h2>
+              <p>
+                Here the matching part of the string is underlined. <br />
+                The mention dropdown is also aligned with the beginning of the
+                string (as opposed to the current caret position)
+              </p>
+              <Highlighted placeholder="@-mentioning" position="start" />
             </div>
           </div>
           <hr />

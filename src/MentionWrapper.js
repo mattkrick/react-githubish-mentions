@@ -1,5 +1,6 @@
 import React, { Component, Children } from "react";
 import getCaretCoords from "textarea-caret";
+import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
 
 const getMenuProps = (keystrokeTriggered, children) => {
@@ -50,8 +51,12 @@ class MentionWrapper extends Component {
     const keystrokeTriggered = this.triggers.indexOf(maybeTrigger);
 
     if (keystrokeTriggered !== -1) {
+      let positionIndex = this.ref.selectionStart;
+      if (this.props.position === "start") {
+        positionIndex = triggerIdx + 1;
+      }
       const query = textBeforeCaret.slice(triggerIdx + 1);
-      const coords = getCaretCoords(this.ref, this.ref.selectionStart);
+      const coords = getCaretCoords(this.ref, positionIndex);
       const { top, left } = this.ref.getBoundingClientRect();
       const child = getMenuProps(keystrokeTriggered, this.props.children);
       const { replace, resolve } = child;
@@ -189,5 +194,13 @@ class MentionWrapper extends Component {
     );
   }
 }
+
+MentionWrapper.propTypes = {
+  position: PropTypes.oneOf(["start", "caret"])
+};
+
+MentionWrapper.defaultProps = {
+  position: "caret"
+};
 
 export default MentionWrapper;

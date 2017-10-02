@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 150vh;
 }
 
 .App-header {
@@ -38,6 +39,10 @@ textarea {
 
 .menuitem {
   padding: 0.3rem;
+}
+
+.menuitem .match {
+  text-decoration: underline;
 }
 
 .menuitem.active {
