@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+  min-height: 150vh;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App-body {
+  width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App .demos > * {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+textarea {
+  height: 5rem;
+  width: 33vw;
+}
+
+.mentionwrapper {
+  background-color: whitesmoke;
+}
+
+.menuitem {
+  padding: 0.3rem;
+}
+
+.menuitem .match {
+  text-decoration: underline;
+}
+
+.menuitem.active {
+  background-color: rgba(0, 0, 255, 0.11);
+}
