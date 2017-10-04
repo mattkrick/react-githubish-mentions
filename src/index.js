@@ -1,2 +1,4 @@
-export MentionWrapper from "./MentionWrapper";
-export MentionMenu from "./MentionMenu";
+import MentionWrapper from "./MentionWrapper";
+import MentionMenu from "./MentionMenu";
+
+export { MentionMenu, MentionWrapper };

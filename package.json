@@ -1,25 +1,19 @@
 {
-  "name": "react-githubish-mentions",
-  "version": "1.1.0",
+  "name": "@mcallistersean/react-githubish-mentions",
+  "version": "1.2.0",
   "description": "a mentions component kinda like GitHub's. But made in react.",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
-    "build": "babel --presets es2015,stage-0,react -d lib/ src/",
+    "build": "babel -d lib/ src/",
     "prepublish": "npm run clean && npm run build",
-    "watch": "babel -w --presets es2015,stage-0,react -d lib/ src/"
+    "watch": "babel -w -d lib/ src/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mattkrick/react-githubish-mentions.git"
   },
-  "keywords": [
-    "react",
-    "mentions",
-    "tag",
-    "autocomplete",
-    "typeahead"
-  ],
+  "keywords": ["react", "mentions", "tag", "autocomplete", "typeahead"],
   "author": "Matt Krick <matt.krick@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -28,18 +22,19 @@
   "homepage": "https://github.com/mattkrick/react-githubish-mentions#readme",
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.x.x",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
     "rimraf": "^2.5.3"
   },
   "dependencies": {
-    "react-portal-hoc": "^0.4.1",
-    "textarea-caret": "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
+    "textarea-caret":
+      "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
   },
   "peerDependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react": ">=15",
+    "react-dom": ">=15"
   }
 }

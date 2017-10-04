@@ -1,5 +1,4 @@
 import React from "react";
-import portal from "react-portal-hoc";
 
 const MentionMenu = props => {
   const {
@@ -31,4 +30,4 @@ const MentionMenu = props => {
   );
 };
 
-export default portal({ clickToClose: true, escToClose: true })(MentionMenu);
+export default MentionMenu;

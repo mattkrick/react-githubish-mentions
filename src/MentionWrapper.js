@@ -2,6 +2,7 @@ import React, { Component, Children } from "react";
 import getCaretCoords from "textarea-caret";
 import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
+import MentionPortal from "./MentionPortal";
 
 const getMenuProps = (keystrokeTriggered, children) => {
   const child = Array.isArray(children)
@@ -21,6 +22,7 @@ class MentionWrapper extends Component {
     };
     const { children } = props;
     this.triggers = Children.map(children, child => child.props.trigger);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   makeOptions = async (query, resolve) => {
@@ -178,17 +180,19 @@ class MentionWrapper extends Component {
           onKeyDown={this.handleKeyDown}
         />
         {top !== undefined && (
-          <MentionMenu
-            active={active}
-            className={className}
-            left={left}
-            isOpen={options.length > 0}
-            item={item}
-            options={options}
-            selectItem={this.selectItem}
-            style={style}
-            top={top}
-          />
+          <MentionPortal close={this.closeMenu}>
+            <MentionMenu
+              active={active}
+              className={className}
+              left={left}
+              isOpen={options.length > 0}
+              item={item}
+              options={options}
+              selectItem={this.selectItem}
+              style={style}
+              top={top}
+            />
+          </MentionPortal>
         )}
       </div>
     );
