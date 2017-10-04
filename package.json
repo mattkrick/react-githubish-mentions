@@ -36,7 +36,6 @@
     "rimraf": "^2.5.3"
   },
   "dependencies": {
-    "react-portal-hoc": "^0.4.2",
     "textarea-caret": "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
   },
   "peerDependencies": {
