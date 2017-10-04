@@ -1,6 +1,6 @@
 {
-  "name": "react-githubish-mentions",
-  "version": "1.1.0",
+  "name": "@mcallistersean/react-githubish-mentions",
+  "version": "1.2.0",
   "description": "a mentions component kinda like GitHub's. But made in react.",
   "main": "./lib/index.js",
   "scripts": {
@@ -13,13 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/mattkrick/react-githubish-mentions.git"
   },
-  "keywords": [
-    "react",
-    "mentions",
-    "tag",
-    "autocomplete",
-    "typeahead"
-  ],
+  "keywords": ["react", "mentions", "tag", "autocomplete", "typeahead"],
   "author": "Matt Krick <matt.krick@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -36,10 +30,11 @@
     "rimraf": "^2.5.3"
   },
   "dependencies": {
-    "textarea-caret": "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
+    "textarea-caret":
+      "git://github.com/mattkrick/textarea-caret-position.git#ede461f40712238c505e4a1861fc68de6e7731ad"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": ">=15",
+    "react-dom": ">=15"
   }
 }
