@@ -165,18 +165,28 @@ class MentionWrapper extends Component {
   };
 
   render() {
-    const { children, component, getRef, ...inputProps } = this.props;
+    const { children, component, getRef, position, onChange, ...inputProps } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
+
+    const componentProps = {
+      ...inputProps,
+      inputRef: this.inputRef,
+      onBlur: this.handleBlur,
+      onInput: this.handleInput,
+      onKeyDown: this.handleKeyDown,
+    };
+
+    let inputElement;
+    if (component) {
+      inputElement =  React.createElement(component, componentProps);
+    } else {
+      inputElement = <textarea {...componentProps} ref={this.inputRef} />;
+    }
+
     return (
       <div>
-        <textarea
-          {...inputProps}
-          ref={this.inputRef}
-          onBlur={this.handleBlur}
-          onInput={this.handleInput}
-          onKeyDown={this.handleKeyDown}
-        />
+        {inputElement}
         {top !== undefined && (
           <MentionMenu
             active={active}
