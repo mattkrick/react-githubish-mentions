@@ -164,6 +164,12 @@ class MentionWrapper extends Component {
     this.ref.focus();
   };
 
+  setActiveOnEvent = active => e => {
+    this.setState({
+      active: active
+    });
+  }
+
   render() {
     const { children, component, getRef, ...inputProps } = this.props;
     const { active, child, left, top, options } = this.state;
@@ -185,6 +191,7 @@ class MentionWrapper extends Component {
             isOpen={options.length > 0}
             item={item}
             options={options}
+            hoverItem={this.setActiveOnEvent}
             selectItem={this.selectItem}
             style={style}
             top={top}
