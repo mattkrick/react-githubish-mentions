@@ -67,10 +67,10 @@ class MentionWrapper extends Component {
         this.setState({
           active: 0,
           child,
-          left: window.scrollX + coords.left + left + this.ref.scrollLeft,
+          left: window.pageXOffset + coords.left + left + this.ref.scrollLeft,
           triggerIdx,
           top:
-            window.scrollY +
+            (window.pageYOffset || 0) +
             coords.top +
             top +
             coords.height -
