@@ -10,8 +10,20 @@ class MentionMenu extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.left != this.state.left || nextProps.top != this.state.top) {
-      this.setState({ left: nextProps.left, right: nextProps.right });
+    let left = nextProps.left;
+    let top = nextProps.top;
+
+    //prevent menu from going off the right of the screen
+    if (this.node && left + this.node.offsetWidth > window.innerWidth) {
+      left = window.innerWidth - (this.node.offsetWidth + 10);
+    }
+    //prevent menu from going off bottom of screen
+    if (this.node && top + this.node.offsetHeight > window.innerHeight) {
+      top = window.innerHeight - (this.node.offsetHeight + 10);
+    }
+
+    if (left != this.state.left || top != this.state.top) {
+      this.setState({ left, right });
     }
   }
   componentDidMount() {
