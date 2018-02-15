@@ -1,6 +1,10 @@
 # react-githubish-mentions
 A wrapper for a textarea to offers autocomplete suggestions when triggered by @ or # or whatever
 
+## LOOKING FOR MAINTAINERS
+
+I no longer use this! To make sure PRs land in a timely fashion, request to become a maintainer.
+
 ## Installation
 `yarn add react-githubish-mentions`
 
