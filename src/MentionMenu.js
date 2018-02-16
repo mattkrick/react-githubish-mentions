@@ -23,7 +23,7 @@ class MentionMenu extends React.Component {
     }
 
     if (left != this.state.left || top != this.state.top) {
-      this.setState({ left, right });
+      this.setState({ left, top });
     }
   }
   componentDidMount() {
