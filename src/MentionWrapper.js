@@ -2,6 +2,7 @@ import React, { Component, Children } from "react";
 import getCaretCoords from "textarea-caret";
 import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
+import MentionPortal from "./MentionPortal";
 
 const getMenuProps = (keystrokeTriggered, children) => {
   const child = Array.isArray(children)
@@ -21,6 +22,7 @@ class MentionWrapper extends Component {
     };
     const { children } = props;
     this.triggers = Children.map(children, child => child.props.trigger);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   makeOptions = async (query, resolve) => {
@@ -171,9 +173,10 @@ class MentionWrapper extends Component {
   }
 
   render() {
-    const { children, component, getRef, ...inputProps } = this.props;
+    const { children, component, getRef, portal, ...inputProps } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
+    const Portal = this.props.portal;
     return (
       <div>
         <textarea
@@ -184,18 +187,20 @@ class MentionWrapper extends Component {
           onKeyDown={this.handleKeyDown}
         />
         {top !== undefined && (
-          <MentionMenu
-            active={active}
-            className={className}
-            left={left}
-            isOpen={options.length > 0}
-            item={item}
-            options={options}
-            hoverItem={this.setActiveOnEvent}
-            selectItem={this.selectItem}
-            style={style}
-            top={top}
-          />
+          <Portal closeFunc={this.closeMenu}>
+            <MentionMenu
+              active={active}
+              className={className}
+              left={left}
+              isOpen={options.length > 0}
+              item={item}
+              options={options}
+              hoverItem={this.setActiveOnEvent}
+              selectItem={this.selectItem}
+              style={style}
+              top={top}
+            />
+          </Portal>
         )}
       </div>
     );
@@ -203,10 +208,12 @@ class MentionWrapper extends Component {
 }
 
 MentionWrapper.propTypes = {
+  portal: PropTypes.func.isRequired,
   position: PropTypes.oneOf(["start", "caret"])
 };
 
 MentionWrapper.defaultProps = {
+  portal: MentionPortal,
   position: "caret"
 };
 
