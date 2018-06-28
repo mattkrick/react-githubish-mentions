@@ -173,7 +173,7 @@ class MentionWrapper extends Component {
   }
 
   render() {
-    const { children, component, getRef, portal, ...inputProps } = this.props;
+    const { children, component, getRef, mobile, portal, ...inputProps } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
     const Portal = this.props.portal;
@@ -194,6 +194,7 @@ class MentionWrapper extends Component {
               left={left}
               isOpen={options.length > 0}
               item={item}
+              mobile={mobile}
               options={options}
               hoverItem={this.setActiveOnEvent}
               selectItem={this.selectItem}

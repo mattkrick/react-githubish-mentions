@@ -40,6 +40,7 @@ class MentionMenu extends React.Component {
       active,
       className,
       item: Item,
+      mobile,
       options,
       hoverItem,
       selectItem,
@@ -51,12 +52,25 @@ class MentionMenu extends React.Component {
       left
     } = this.state;
 
-    const menuStyle = {
-      ...style,
-      left,
-      top,
-      position: "absolute"
-    };
+    const menuStyle;
+
+    if (mobile) {
+      const menuStyle = {
+        ...style,
+        left,
+        top,
+        position: 'absolute',
+        zIndex: '201'
+      };
+    } else {
+      const menuStyle = {
+        ...style,
+        left,
+        top,
+        position: 'absolute',
+      };
+    }
+
     return (
       <div style={menuStyle} className={className} ref={node => this.node = node}>
         {options.map((option, idx) => {
