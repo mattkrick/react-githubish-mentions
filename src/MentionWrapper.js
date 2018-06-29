@@ -3,6 +3,7 @@ import getCaretCoords from "textarea-caret";
 import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
 import MentionPortal from "./MentionPortal";
+import MentionScrollBar from './MentionScrollBar';
 
 const getMenuProps = (keystrokeTriggered, children) => {
   const child = Array.isArray(children)
@@ -173,47 +174,68 @@ class MentionWrapper extends Component {
   }
 
   render() {
-    const { children, component, getRef, mobile, portal, ...inputProps } = this.props;
+    const { children, component, getRef, isNotBrowser, portal, style: containerStyle, ...inputProps } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
     const Portal = this.props.portal;
     return (
-      <div>
+      <div style={isNotBrowser ? {
+        ...containerStyle,
+        display: 'flex',
+        flexDirection: 'column'
+      } : {}}>
         <textarea
           {...inputProps}
+          className='flex-auto'
           ref={this.inputRef}
           onBlur={this.handleBlur}
           onInput={this.handleInput}
           onKeyDown={this.handleKeyDown}
         />
-        {top !== undefined && (
-          <Portal closeFunc={this.closeMenu}>
-            <MentionMenu
+        {isNotBrowser ?
+          top !== undefined && (
+            <MentionScrollBar 
               active={active}
               className={className}
               left={left}
               isOpen={options.length > 0}
               item={item}
-              mobile={mobile}
               options={options}
               hoverItem={this.setActiveOnEvent}
               selectItem={this.selectItem}
               style={style}
               top={top}
-            />
-          </Portal>
-        )}
+            />) :
+          top !== undefined && (
+            <Portal closeFunc={this.closeMenu}>
+              <MentionMenu
+                active={active}
+                className={className}
+                left={left}
+                isOpen={options.length > 0}
+                item={item}
+                options={options}
+                hoverItem={this.setActiveOnEvent}
+                selectItem={this.selectItem}
+                style={style}
+                top={top}
+              />
+            </Portal>
+          )
+        }
       </div>
     );
   }
 }
 
 MentionWrapper.propTypes = {
+  isNotBrowser: PropTypes.bool.isRequired,
   portal: PropTypes.func.isRequired,
   position: PropTypes.oneOf(["start", "caret"])
 };
 
 MentionWrapper.defaultProps = {
+  isNotBrowser: false,
   portal: MentionPortal,
   position: "caret"
 };

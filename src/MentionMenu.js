@@ -52,24 +52,12 @@ class MentionMenu extends React.Component {
       left
     } = this.state;
 
-    const menuStyle;
-
-    if (mobile) {
-      const menuStyle = {
-        ...style,
-        left,
-        top,
-        position: 'absolute',
-        zIndex: '201'
-      };
-    } else {
-      const menuStyle = {
-        ...style,
-        left,
-        top,
-        position: 'absolute',
-      };
-    }
+    const menuStyle = {
+      ...style,
+      left,
+      top,
+      position: 'absolute',
+    };
 
     return (
       <div style={menuStyle} className={className} ref={node => this.node = node}>
