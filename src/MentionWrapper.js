@@ -26,6 +26,18 @@ class MentionWrapper extends Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.isNotBrowser) {
+      document.addEventListener('click', this.closeMenu, false);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.isNotBrowser) {
+      document.removeEventListener('click', this.closeMenu, false);
+    }
+  }
+
   makeOptions = async (query, resolve) => {
     const options = await resolve(query);
     if (options.length > 0) {
@@ -180,13 +192,15 @@ class MentionWrapper extends Component {
     const Portal = this.props.portal;
     return (
       <div style={isNotBrowser ? {
-        ...containerStyle,
-        display: 'flex',
-        flexDirection: 'column'
-      } : {}}>
+          ...containerStyle,
+          display: 'flex',
+          flexDirection: 'column'
+        } : {
+          ...containerStyle
+        }}>
         <textarea
           {...inputProps}
-          className='flex-auto'
+          className='p1 width-100-percent flex-auto height-100-percent mb1'
           ref={this.inputRef}
           onBlur={this.handleBlur}
           onInput={this.handleInput}
@@ -197,6 +211,7 @@ class MentionWrapper extends Component {
             <MentionScrollBar 
               active={active}
               className={className}
+              closeFunc={this.closeMenu}
               left={left}
               isOpen={options.length > 0}
               item={item}
