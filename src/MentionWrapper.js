@@ -245,7 +245,6 @@ class MentionWrapper extends Component {
 
 MentionWrapper.propTypes = {
   isNotBrowser: PropTypes.bool.isRequired,
-  portal: PropTypes.func.isRequired,
   position: PropTypes.oneOf(["start", "caret"])
 };
 
