@@ -1,4 +1,5 @@
 import React from "react";
+import portal from 'react-portal-hoc';
 
 class MentionMenu extends React.Component {
   constructor(props) {
@@ -40,7 +41,6 @@ class MentionMenu extends React.Component {
       active,
       className,
       item: Item,
-      mobile,
       options,
       hoverItem,
       selectItem,
@@ -73,4 +73,4 @@ class MentionMenu extends React.Component {
   }
 }
 
-export default MentionMenu;
+export default portal({ clickToClose: true, escToClose: true })(MentionMenu);

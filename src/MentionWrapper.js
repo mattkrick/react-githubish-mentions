@@ -2,7 +2,6 @@ import React, { Component, Children } from "react";
 import getCaretCoords from "textarea-caret";
 import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
-import MentionPortal from "./MentionPortal";
 import MentionScrollBar from './MentionScrollBar';
 
 const getMenuProps = (keystrokeTriggered, children) => {
@@ -225,20 +224,18 @@ class MentionWrapper extends Component {
               top={top}
             />) :
           top !== undefined && (
-            <Portal closeFunc={this.closeMenu}>
-              <MentionMenu
-                active={active}
-                className={className}
-                left={left}
-                isOpen={options.length > 0}
-                item={item}
-                options={options}
-                hoverItem={this.setActiveOnEvent}
-                selectItem={this.selectItem}
-                style={style}
-                top={top}
-              />
-            </Portal>
+            <MentionMenu
+              active={active}
+              className={className}
+              left={left}
+              isOpen={options.length > 0}
+              item={item}
+              options={options}
+              hoverItem={this.setActiveOnEvent}
+              selectItem={this.selectItem}
+              style={style}
+              top={top}
+            />
           )
         }
       </div>
@@ -254,7 +251,6 @@ MentionWrapper.propTypes = {
 
 MentionWrapper.defaultProps = {
   isNotBrowser: false,
-  portal: MentionPortal,
   position: "caret"
 };
 
