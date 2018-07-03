@@ -190,6 +190,9 @@ class MentionWrapper extends Component {
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
     const Portal = this.props.portal;
+    const textAreaClassName = isNotBrowser ? 
+      'p1 width-100-percent flex-auto height-100-percent' :
+      'p1 width-100-percent flex-auto height-100-percent mb2';
     return (
       <div style={isNotBrowser ? {
           ...containerStyle,
@@ -200,7 +203,7 @@ class MentionWrapper extends Component {
         }}>
         <textarea
           {...inputProps}
-          className='p1 width-100-percent flex-auto height-100-percent mb1'
+          className={textAreaClassName}
           ref={this.inputRef}
           onBlur={this.handleBlur}
           onInput={this.handleInput}
