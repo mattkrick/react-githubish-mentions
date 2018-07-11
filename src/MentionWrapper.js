@@ -185,21 +185,23 @@ class MentionWrapper extends Component {
   }
 
   render() {
-    const { children, component, getRef, isNotBrowser, portal, style: containerStyle, ...inputProps } = this.props;
+    const { 
+      children,
+      component,
+      CustomComponent,
+      getRef,
+      isNotBrowser,
+      portal,
+      style: containerStyle,
+      textAreaClassName,
+      ...inputProps
+    } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
     const Portal = this.props.portal;
-    const textAreaClassName = isNotBrowser ? 
-      'p1 width-100-percent flex-auto height-100-percent' :
-      'p1 width-100-percent flex-auto height-100-percent mb2';
+
     return (
-      <div style={isNotBrowser ? {
-          ...containerStyle,
-          display: 'flex',
-          flexDirection: 'column'
-        } : {
-          ...containerStyle
-        }}>
+      <div style={containerStyle}>
         <textarea
           {...inputProps}
           className={textAreaClassName}
@@ -210,7 +212,7 @@ class MentionWrapper extends Component {
         />
         {isNotBrowser ?
           top !== undefined && (
-            <MentionScrollBar 
+            <CustomComponent 
               active={active}
               className={className}
               closeFunc={this.closeMenu}
