@@ -191,17 +191,16 @@ class MentionWrapper extends Component {
       CustomComponent,
       getRef,
       isNotBrowser,
-      portal,
-      style: containerStyle,
+      containerStyle,
       textAreaClassName,
+      textWrapperClassName,
       ...inputProps
     } = this.props;
     const { active, child, left, top, options } = this.state;
     const { item, className, style } = child;
-    const Portal = this.props.portal;
-
+    
     return (
-      <div style={containerStyle}>
+      <div className={textWrapperClassName} style={containerStyle}>
         <textarea
           {...inputProps}
           className={textAreaClassName}
