@@ -56,7 +56,7 @@ class MentionMenu extends React.Component {
       ...style,
       left,
       top,
-      position: "absolute",
+      position: "absolute"
     };
 
     return (
