@@ -24,18 +24,6 @@ class MentionWrapper extends Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  componentWillMount() {
-    if (this.props.isNotBrowser) {
-      document.addEventListener('click', this.closeMenu, false);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.props.isNotBrowser) {
-      document.removeEventListener('click', this.closeMenu, false);
-    }
-  }
-
   makeOptions = async (query, resolve) => {
     const options = await resolve(query);
     if (options.length > 0) {
