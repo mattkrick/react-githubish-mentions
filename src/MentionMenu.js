@@ -1,5 +1,5 @@
 import React from "react";
-import portal from 'react-portal-hoc';
+import portal from "react-portal-hoc";
 
 class MentionMenu extends React.Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class MentionMenu extends React.Component {
       ...style,
       left,
       top,
-      position: 'absolute',
+      position: "absolute",
     };
 
     return (
