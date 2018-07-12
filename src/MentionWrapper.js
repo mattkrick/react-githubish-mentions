@@ -178,7 +178,6 @@ class MentionWrapper extends Component {
       CustomComponent,
       getRef,
       containerStyle,
-      textAreaClassName,
       textWrapperClassName,
       ...inputProps
     } = this.props;
@@ -189,7 +188,6 @@ class MentionWrapper extends Component {
       <div className={textWrapperClassName} style={containerStyle}>
         <textarea
           {...inputProps}
-          className={textAreaClassName}
           ref={this.inputRef}
           onBlur={this.handleBlur}
           onInput={this.handleInput}
