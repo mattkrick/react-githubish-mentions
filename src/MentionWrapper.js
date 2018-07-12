@@ -2,7 +2,6 @@ import React, { Component, Children } from "react";
 import getCaretCoords from "textarea-caret";
 import PropTypes from "prop-types";
 import MentionMenu from "./MentionMenu";
-import MentionScrollBar from './MentionScrollBar';
 
 const getMenuProps = (keystrokeTriggered, children) => {
   const child = Array.isArray(children)
@@ -190,7 +189,6 @@ class MentionWrapper extends Component {
       component,
       CustomComponent,
       getRef,
-      isNotBrowser,
       containerStyle,
       textAreaClassName,
       textWrapperClassName,
@@ -209,7 +207,7 @@ class MentionWrapper extends Component {
           onInput={this.handleInput}
           onKeyDown={this.handleKeyDown}
         />
-        {isNotBrowser ?
+        {CustomComponent ?
           top !== undefined && (
             <CustomComponent 
               active={active}
@@ -245,12 +243,10 @@ class MentionWrapper extends Component {
 }
 
 MentionWrapper.propTypes = {
-  isNotBrowser: PropTypes.bool.isRequired,
   position: PropTypes.oneOf(["start", "caret"])
 };
 
 MentionWrapper.defaultProps = {
-  isNotBrowser: false,
   position: "caret"
 };
 
